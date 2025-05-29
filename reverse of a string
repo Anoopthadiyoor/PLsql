@@ -1,0 +1,17 @@
+SET SERVEROUTPUT ON;
+
+ACCEPT input_str PROMPT 'Enter a string to reverse: '
+
+DECLARE
+    original_str VARCHAR2(100) := '&input_str';
+    reversed_str VARCHAR2(100) := '';
+    len          NUMBER;
+BEGIN
+    len := LENGTH(original_str);
+
+    FOR i IN REVERSE 1..len LOOP
+        reversed_str := reversed_str || SUBSTR(original_str, i, 1);
+    END LOOP;
+
+    DBMS_OUTPUT.PUT_LINE('Original String: ' || original_str);
+    DBMS_OUTPUT.PUT_LINE('Reversed String: ' || reversed_str);
