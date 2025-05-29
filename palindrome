@@ -1,0 +1,17 @@
+SET SERVEROUTPUT ON;
+
+DECLARE
+    original_str VARCHAR2(50) := 'MALAYALAM';
+    reversed_str VARCHAR2(50) := '';
+BEGIN
+    FOR i IN REVERSE 1..LENGTH(original_str) LOOP
+        reversed_str := reversed_str || SUBSTR(original_str, i, 1);
+    END LOOP;
+
+    IF UPPER(original_str) = UPPER(reversed_str) THEN
+        DBMS_OUTPUT.PUT_LINE(original_str || ' is a Palindrome');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE(original_str || ' is Not a Palindrome');
+    END IF;
+END;
+/
