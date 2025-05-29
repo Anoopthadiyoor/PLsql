@@ -1,0 +1,14 @@
+
+SET SERVEROUTPUT ON;
+
+DECLARE
+    grade CHAR := 'B';
+BEGIN
+    CASE grade
+        WHEN 'A' THEN DBMS_OUTPUT.PUT_LINE('Excellent');
+        WHEN 'B' THEN DBMS_OUTPUT.PUT_LINE('Good');
+        WHEN 'C' THEN DBMS_OUTPUT.PUT_LINE('Fair');
+        ELSE DBMS_OUTPUT.PUT_LINE('Needs Improvement');
+    END CASE;
+END;
+/
