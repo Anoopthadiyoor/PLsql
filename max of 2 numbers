@@ -1,0 +1,19 @@
+SET SERVEROUTPUT ON;
+
+ACCEPT num1 PROMPT 'Enter the first number: '
+ACCEPT num2 PROMPT 'Enter the second number: '
+
+DECLARE
+    num1 NUMBER := &num1;
+    num2 NUMBER := &num2;
+    max_num NUMBER;
+BEGIN
+    IF num1 > num2 THEN
+        max_num := num1;
+    ELSE
+        max_num := num2;
+    END IF;
+
+    DBMS_OUTPUT.PUT_LINE('The maximum of ' || num1 || ' and ' || num2 || ' is: ' || max_num);
+END;
+/
