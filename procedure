@@ -1,0 +1,25 @@
+q:   create a procedure for calculating total arks of three subjects and store the value in the sessional exam table
+
+DECLARE
+    PROCEDURE insert_total_marks (
+        p_student_id IN NUMBER,
+        p_mark1      IN NUMBER,
+        p_mark2      IN NUMBER,
+        p_mark3      IN NUMBER
+    ) IS
+        v_total NUMBER;
+    BEGIN
+        v_total := p_mark1 + p_mark2 + p_mark3;
+
+        INSERT INTO sessional_exam(student_id, mark1, mark2, mark3, total_marks)
+        VALUES (p_student_id, p_mark1, p_mark2, p_mark3, v_total);
+
+        DBMS_OUTPUT.PUT_LINE('Record inserted for Student ID ' || p_student_id || ' with total: ' || v_total);
+    END;
+
+BEGIN
+    -- Call the procedure within the same block
+    insert_total_marks(101, 78, 85, 90);
+END;
+/
+
