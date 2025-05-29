@@ -1,0 +1,11 @@
+Q: create an after delete triger to insertthe deleted records into a backup employee table
+
+
+CREATE OR REPLACE TRIGGER trg_after_delete_employee
+AFTER DELETE ON employee
+FOR EACH ROW
+BEGIN
+    INSERT INTO backup_employee
+    VALUES (:OLD.emp_id, :OLD.emp_name, :OLD.salary, :OLD.dept_id); -- adjust column names as needed
+END;
+/
