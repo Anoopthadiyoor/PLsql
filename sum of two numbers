@@ -1,0 +1,14 @@
+SET SERVEROUTPUT ON;
+
+ACCEPT num1 PROMPT 'Enter the first number: '
+ACCEPT num2 PROMPT 'Enter the second number: '
+
+DECLARE
+    num1 NUMBER := &num1;
+    num2 NUMBER := &num2;
+    sum  NUMBER;
+BEGIN
+    sum := num1 + num2;
+    DBMS_OUTPUT.PUT_LINE('The sum of ' || num1 || ' and ' || num2 || ' is: ' || sum);
+END;
+/
