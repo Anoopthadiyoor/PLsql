@@ -1,0 +1,46 @@
+question:   write a plsql fuction  to update the salary of employee to the specified % entered by the user
+
+
+SET SERVEROUTPUT ON;
+
+-- Accept input from user
+ACCEPT emp_id PROMPT 'Enter Employee ID: '
+ACCEPT percent PROMPT 'Enter Percentage Increase: '
+
+-- Create the function
+CREATE OR REPLACE FUNCTION update_salary_percent (
+    p_emp_id IN NUMBER,
+    p_percent IN NUMBER
+) RETURN VARCHAR2 IS
+    v_old_salary NUMBER;
+    v_new_salary NUMBER;
+BEGIN
+    SELECT salary INTO v_old_salary
+    FROM employees
+    WHERE emp_id = p_emp_id;
+
+    v_new_salary := v_old_salary + (v_old_salary * p_percent / 100);
+
+    UPDATE employees
+    SET salary = v_new_salary
+    WHERE emp_id = p_emp_id;
+
+    COMMIT;
+
+    RETURN 'Salary updated from ' || v_old_salary || ' to ' || v_new_salary;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        RETURN 'Employee with ID ' || p_emp_id || ' not found.';
+    WHEN OTHERS THEN
+        RETURN 'Error: ' || SQLERRM;
+END;
+/
+
+-- Call the function using the user input
+DECLARE
+    result VARCHAR2(200);
+BEGIN
+    result := update_salary_percent(&emp_id, &percent);
+    DBMS_OUTPUT.PUT_LINE(result);
+END;
+/
